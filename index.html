@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Claude Is Not Just a Chatbot</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --plum: #2d1b3d;
+    --plum-light: #3d2a4f;
+    --plum-soft: #4a3460;
+    --red: #ff1744;
+    --red-soft: #ff4569;
+    --cream: #faf5ef;
+    --cream-dark: #f0e8dd;
+    --ink: #1a1a2e;
+    --muted: #9b8fa6;
+    --white: #ffffff;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--cream);
+    color: var(--ink);
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+    font-weight: 300;
+  }
+
+  /* ---- HERO ---- */
+  .hero {
+    background: var(--plum);
+    padding: 5rem 2rem 4.5rem;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(255,23,68,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .hero-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 4rem;
+    align-items: center;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.4rem, 5vw, 3.6rem);
+    line-height: 1.1;
+    color: var(--red);
+    font-weight: 400;
+    letter-spacing: -0.02em;
+  }
+
+  .hero-right p {
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ---- NUMBERED BAR ---- */
+  .numbered-bar {
+    background: var(--plum-light);
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 1.5rem 2rem;
+  }
+
+  .numbered-bar-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1rem;
+  }
+
+  .numbered-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .numbered-item .num {
+    color: var(--red);
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.1rem;
+  }
+
+  .numbered-item .text {
+    color: rgba(255,255,255,0.85);
+    font-size: 0.78rem;
+    line-height: 1.4;
+    font-weight: 300;
+  }
+
+  /* ---- WHY CLAUDE SECTION ---- */
+  .why-section {
+    background: var(--cream);
+    padding: 5rem 2rem;
+  }
+
+  .why-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .why-left h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    color: var(--red);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+    margin-bottom: 1.25rem;
+  }
+
+  .why-left p {
+    font-size: 0.95rem;
+    color: #6b5f74;
+    line-height: 1.65;
+    font-weight: 300;
+  }
+
+  .why-cards {
+    display: grid;
+    gap: 0.75rem;
+  }
+
+  .why-card {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.15rem 1.4rem;
+    border-left: 3px solid var(--red);
+    transition: transform 0.2s;
+  }
+
+  .why-card:hover { transform: translateX(4px); }
+
+  .why-card h3 {
+    font-size: 0.88rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin-bottom: 0.2rem;
+  }
+
+  .why-card p {
+    font-size: 0.82rem;
+    color: #7c7189;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  /* ---- CREATE SECTION (dark) ---- */
+  .create-section {
+    background: var(--plum);
+    padding: 5rem 2rem;
+  }
+
+  .create-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .create-header {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3rem;
+    align-items: start;
+    margin-bottom: 2.5rem;
+  }
+
+  .create-header h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    color: var(--red);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .create-header p {
+    font-size: 0.95rem;
+    color: var(--muted);
+    line-height: 1.65;
+    font-weight: 300;
+    padding-top: 0.5rem;
+  }
+
+  .compare-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.75rem;
+  }
+
+  .compare-col-header {
+    font-size: 0.7rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    padding: 0.75rem 1rem;
+  }
+
+  .compare-col-header.before { color: var(--muted); }
+  .compare-col-header.after { color: var(--red-soft); }
+
+  .compare-before, .compare-after {
+    padding: 1rem 1.15rem;
+    border-radius: 10px;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    font-weight: 300;
+  }
+
+  .compare-before {
+    background: var(--plum-light);
+    color: var(--muted);
+  }
+
+  .compare-after {
+    background: rgba(255,23,68,0.08);
+    color: rgba(255,255,255,0.9);
+    border-left: 3px solid var(--red);
+  }
+
+  .compare-row {
+    display: contents;
+  }
+
+  .create-tagline {
+    font-size: 1.1rem;
+    font-style: italic;
+    color: var(--muted);
+    margin-top: 2rem;
+    font-weight: 300;
+  }
+
+  /* ---- TEAMS SECTION (cream) ---- */
+  .teams-section {
+    background: var(--cream);
+    padding: 5rem 2rem;
+  }
+
+  .teams-inner {
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+
+  .teams-header {
+    margin-bottom: 3rem;
+  }
+
+  .teams-header h2 {
+    font-size: clamp(2rem, 4vw, 2.8rem);
+    line-height: 1.15;
+    color: var(--red);
+    font-weight: 400;
+    letter-spacing: -0.015em;
+  }
+
+  .teams-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2.5rem 3rem;
+  }
+
+  .team-block {}
+
+  .team-header {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .team-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    background: var(--red);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    flex-shrink: 0;
+  }
+
+  .team-header h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .team-examples {
+    list-style: none;
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  .team-examples li {
+    padding: 0.6rem 0.85rem;
+    background: var(--white);
+    border-radius: 8px;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    color: #4a3f55;
+    font-weight: 300;
+    border-left: 2px solid var(--cream-dark);
+    transition: border-color 0.2s, background 0.2s;
+  }
+
+  .team-examples li:hover {
+    border-left-color: var(--red);
+    background: #fff5f5;
+  }
+
+  /* ---- FOOTER ---- */
+  .site-footer {
+    background: var(--plum);
+    text-align: center;
+    padding: 2rem;
+    font-size: 0.8rem;
+    color: var(--muted);
+    font-weight: 300;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  /* ---- SCROLL ANIMATIONS ---- */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ---- RESPONSIVE ---- */
+  @media (max-width: 768px) {
+    .hero-inner { grid-template-columns: 1fr; gap: 2rem; }
+    .hero { padding: 3.5rem 1.5rem 3rem; }
+    .numbered-bar-inner { grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .why-inner { grid-template-columns: 1fr; }
+    .create-header { grid-template-columns: 1fr; gap: 1rem; }
+    .compare-grid { grid-template-columns: 1fr; }
+    .compare-col-header { display: none; }
+    .compare-before, .compare-after { margin-bottom: 0.25rem; }
+    .teams-grid { grid-template-columns: 1fr; }
+    section { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-inner">
+    <div>
+      <h1>Claude Is Not Just a Chatbot.</h1>
+    </div>
+    <div class="hero-right">
+      <p>Most people use AI to rewrite an email or summarize a meeting. That's like buying a sports car and only driving it to the mailbox.</p>
+      <br>
+      <p>Claude can research, analyze, build, strategize, create, and automate — across every function. No code required. Just describe what you need in your own words.</p>
+    </div>
+  </div>
+</header>
+
+<!-- NUMBERED BAR -->
+<div class="numbered-bar">
+  <div class="numbered-bar-inner">
+    <div class="numbered-item"><span class="num">01</span><span class="text">Handles 200+ page documents</span></div>
+    <div class="numbered-item"><span class="num">02</span><span class="text">Creates real downloadable files</span></div>
+    <div class="numbered-item"><span class="num">03</span><span class="text">Follows instructions precisely</span></div>
+    <div class="numbered-item"><span class="num">04</span><span class="text">Remembers complex workflows</span></div>
+    <div class="numbered-item"><span class="num">05</span><span class="text">Thinks through problems with you</span></div>
+  </div>
+</div>
+
+<!-- WHY CLAUDE -->
+<section class="why-section">
+  <div class="why-inner">
+    <div class="why-left reveal">
+      <h2>Why Claude Over ChatGPT?</h2>
+      <p>Both are powerful AI tools, but the differences matter when you're doing real work. Claude is built for depth, precision, and the kind of tasks that go far beyond a simple Q&A.</p>
+    </div>
+    <div class="why-cards">
+      <div class="why-card reveal">
+        <h3>Handles bigger tasks</h3>
+        <p>Upload a 200-page document and work with the whole thing. ChatGPT loses track after a few pages.</p>
+      </div>
+      <div class="why-card reveal">
+        <h3>Creates real files</h3>
+        <p>Get a downloadable Word doc, spreadsheet, or slide deck — not just text you have to copy-paste and reformat.</p>
+      </div>
+      <div class="why-card reveal">
+        <h3>Follows instructions precisely</h3>
+        <p>Ask for a 200-word summary in bullet points and that's what you get. Less back-and-forth to fix the output.</p>
+      </div>
+      <div class="why-card reveal">
+        <h3>Keeps up with complex workflows</h3>
+        <p>Chain 5 tasks in one conversation and Claude remembers every step. ChatGPT forgets what you said 3 messages ago.</p>
+      </div>
+      <div class="why-card reveal">
+        <h3>Thinks, not just answers</h3>
+        <p>Ask Claude to poke holes in your plan, weigh tradeoffs, or challenge your assumptions. It's a thinking partner, not a search bar.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CREATE THINGS -->
+<section class="create-section">
+  <div class="create-inner">
+    <div class="create-header reveal">
+      <h2>Create Things You Couldn't Create Before</h2>
+      <p>Claude doesn't just write text — it builds working tools, dashboards, and pages for you. Describe what you need in your own words, and Claude handles the technical side behind the scenes.</p>
+    </div>
+
+    <div class="compare-grid">
+      <div class="compare-col-header before">⏳ Used to take days</div>
+      <div class="compare-col-header after">⚡ Now takes minutes with Claude</div>
+
+      <div class="compare-before reveal">Getting a custom dashboard built for your team</div>
+      <div class="compare-after reveal">"Create an interactive dashboard from this spreadsheet showing sales by region and month"</div>
+
+      <div class="compare-before reveal">Getting an ROI calculator on your website</div>
+      <div class="compare-after reveal">"Build an ROI calculator where prospects enter their numbers and see projected savings"</div>
+
+      <div class="compare-before reveal">Waiting for a landing page mockup from design</div>
+      <div class="compare-after reveal">"Build a working landing page with headline, benefits, pricing table, and a signup form"</div>
+
+      <div class="compare-before reveal">Coordinating to merge data from multiple files</div>
+      <div class="compare-after reveal">"Combine these 12 spreadsheets into one master file, match the columns, and highlight conflicts"</div>
+    </div>
+
+    <p class="create-tagline reveal">You describe the outcome. Claude handles the how.</p>
+  </div>
+</section>
+
+<!-- TEAMS -->
+<section class="teams-section">
+  <div class="teams-inner">
+    <div class="teams-header reveal">
+      <h2>What you can do with Claude</h2>
+    </div>
+
+    <div class="teams-grid">
+      <div class="team-block reveal">
+        <div class="team-header">
+          <div class="team-icon">📈</div>
+          <h3>Sales</h3>
+        </div>
+        <ul class="team-examples">
+          <li>Research a prospect's company, financials, and recent news — full briefing in 30 seconds</li>
+          <li>Generate a personalized pitch deck tailored to a prospect's industry and pain points</li>
+          <li>Build a competitive battle card comparing your product vs. a specific competitor</li>
+          <li>Draft a follow-up sequence of 5 emails that gets progressively more compelling</li>
+          <li>Analyze your pipeline spreadsheet and flag deals at risk based on patterns</li>
+        </ul>
+      </div>
+
+      <div class="team-block reveal">
+        <div class="team-header">
+          <div class="team-icon">🎨</div>
+          <h3>Marketing</h3>
+        </div>
+        <ul class="team-examples">
+          <li>Turn a product spec into 10 different LinkedIn posts, each with a different angle</li>
+          <li>Analyze competitor websites and messaging — get a positioning gap report</li>
+          <li>Create a full content calendar with themes, headlines, and channel strategy</li>
+          <li>Extract the 5 most compelling customer quotes from survey results for a case study</li>
+          <li>Write an entire landing page — headline, subheads, CTAs, FAQs — ready for design</li>
+          <li>Repurpose a webinar transcript into a blog post, email series, and social clips</li>
+        </ul>
+      </div>
+
+      <div class="team-block reveal">
+        <div class="team-header">
+          <div class="team-icon">💰</div>
+          <h3>Finance & Operations</h3>
+        </div>
+        <ul class="team-examples">
+          <li>Upload a messy spreadsheet — Claude cleans, reformats, and adds formulas</li>
+          <li>Compare budget vs. actuals across 12 months and generate a variance report</li>
+          <li>Read a 100-page vendor contract and extract every financial obligation and deadline</li>
+          <li>Build a financial model or forecast — describe the logic, get a working spreadsheet</li>
+          <li>Automate a weekly report: paste raw data, get a formatted summary with key callouts</li>
+          <li>Analyze expense data and flag anomalies or trends worth investigating</li>
+        </ul>
+      </div>
+
+      <div class="team-block reveal">
+        <div class="team-header">
+          <div class="team-icon">🙋</div>
+          <h3>Customer Success</h3>
+        </div>
+        <ul class="team-examples">
+          <li>Analyze support tickets from last quarter and identify the top recurring complaints</li>
+          <li>Draft a QBR presentation for a specific customer using their usage data</li>
+          <li>Build a churn risk scorecard — describe your signals, get a working framework</li>
+          <li>Write a renewal proposal that highlights ROI based on the customer's own metrics</li>
+          <li>Create a playbook for handling the 10 most common objections at renewal</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">claude.ai · Built by Anthropic · No technical skills required</footer>
+
+<script>
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
+  }, { threshold: 0.1, rootMargin: '0px 0px -30px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
